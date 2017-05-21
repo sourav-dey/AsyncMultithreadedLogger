@@ -5,7 +5,6 @@
 #include "Thread.h"
 #include "WorkerQueue.h"
 #include "Logger.h"
-#include "WorkItem.h"
 
 class ConsumerThread : public Thread {
     WorkerQueue<Logger::LogStruct *>& m_queue;
@@ -30,7 +29,7 @@ public:
         }
 
         while(!m_done) {
-            Logger::LogStruct *item = (Logger::LogStruct*)Logger::instance()->m_queue.remove();
+            Logger::LogStruct *item = Logger::instance()->m_queue.remove();
             Logger::instance()->writetoFile(item->logtype, item->message);
             delete item;
 

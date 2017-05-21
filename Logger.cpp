@@ -26,7 +26,7 @@ void Logger::debugInfo(LogType logType, std::string message) {
 void Logger::writetoFile(LogType logType, std::string message) {
     printf("%s\n ", message.c_str());
     if (logType >= m_logginglevel) {
-        FILE *fp = std::fopen(m_fileName.c_str(), "a");
+        FILE *fp = std::fopen(m_fileName.c_str(), "a+");
         if (!fp) {
             std::cerr << "File opening failed";
             return;
@@ -38,7 +38,7 @@ void Logger::writetoFile(LogType logType, std::string message) {
             fflush(fp);
         } else {
             fclose(fp);
-            fp = nullptr;
+            //fp = nullptr;
         }
     }
 }
